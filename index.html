@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapecoranera - Online Bestellen</title>
+    <style>
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+    /* HEADER */
+    .logo {
+        width: 110px;
+    }
+
+    h1.emri {
+        font-size: 1.3rem;
+    }
+
+    .info-box {
+        font-size: 0.8rem;
+    }
+
+    /* ITEMS */
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .item-details {
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .item-name {
+        font-size: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .item-desc {
+        font-size: 0.8rem;
+    }
+
+    .price {
+        font-size: 1rem;
+    }
+
+    /* BUTTON FULL WIDTH */
+    .add-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    /* CART */
+    .cart-content {
+        max-height: 250px;
+        padding: 10px;
+    }
+
+    .checkout-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* LIEFERPREISE */
+    .row {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .row span {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* HEADINGS */
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+}
+        /* FIX TEXT BREAKING (SHUME E RENDESISHME) */
+.item-name,
+.item-desc {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* SIGURON QE PRICE MOS SHTYHET POSHT KEQ */
+.item {
+    align-items: flex-start;
+}
+
+/* MOBILE EXTRA FIX */
+@media (max-width: 768px) {
+
+    .item {
+        flex-direction: column;
+    }
+
+    .price {
+        margin-top: 5px;
+    }
+
+}
+        .lieferpreise {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.lieferpreise h3 {
+  color: #c0392b;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row span {
+  width: 25%;
+}
+        :root { --primary: #204629; --secondary: #f4f4f4; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #fff; color: #000000; padding-bottom: 120px; }
+        header { background: var(--primary); color: white; padding: 5px 15px; text-align: center; border-bottom: 5px solid #000000; }
+        .info-box { font-size: 0.9rem; margin-top: 10px; line-height: 1.4; }
+        .container { max-width: 800px; margin: auto; padding: 15px; }
+        h2 { background: var(--primary); color: white; padding: 10px; border-radius: 4px; font-size: 1.4rem; margin-top: 30px; }
+        h3 { border-bottom: 2px solid var(--primary); color: var(--primary); margin-top: 25px; }
+        
+        .item { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .item-details { flex: 1; padding-right: 10px; }
+        .item-name { font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .item-desc { font-size: 0.85rem; color: #000000; display: block; margin: 4px 0; }
+        .price { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+        
+        /* THE VEGETARIAN ICON STYLE */
+        .veg-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid #2e7d32;
+            border-radius: 50%;
+            color: #2e7d32;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            flex-shrink: 0;
+        }
+
+        .add-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; background-color: #049c3c; }
+        .add-btn:hover { background: #04752d; }
+
+        #cart-container { position: fixed; bottom: 0; width: 100%; background: white; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); z-index: 1000; display: none; }
+        .cart-content { max-width: 800px; margin: auto; padding: 15px; max-height: 400px; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px dashed #ccc; }
+        .note-input { width: 100%; border: 1px solid #ddd; padding: 5px; margin-top: 5px; border-radius: 4px; font-size: 0.85rem; }
+        .remove-btn { color: red; border: none; background: none; cursor: pointer; font-weight: bold; }
+        .checkout-btn { background: #25D366; color: white; width: 100%; border: none; padding: 15px; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+        .emri{ color: #ffffff; }
+        .logo{ width: 150px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img class="logo" src="logo.png">
+    <h1 class="emri">𝓛𝓐𝓟𝓔𝓒𝓞𝓡𝓐𝓝𝓔𝓡𝓐</h1>
+    <div class="info-box">
+        Heinsheimer Str.5, 74906 Bad Rappenau<br>
+        Tel: 072642081389<br>
+        <strong>Öffnungszeiten:</strong> Mittwoch bis Montag 16:00-22:00 <br> (Dinstag Ruhetag) 
+    </div>
+</header>
+
+<div class="container" id="menu-container"></div>
+
+<div id="cart-container">
+    <div class="cart-content">
+        <h4 style="margin:0 0 10px 0;">Ihr Warenkorb</h4>
+        <div id="cart-items"></div>
+        <div style="text-align: right; font-weight: bold; font-size: 1.2rem; padding: 10px 0;">
+            Gesamt: <span id="total-price">0.00</span>€
+        </div>
+    </div>
+    <button class="checkout-btn" onclick="sendWhatsApp()">Bestellung per WhatsApp senden</button>
+</div>
+
+<script>
+
+const menuData = [
+    { category: "VORSPEISEN", items: [
+        { id: 1, name: 'BRUSCHETTA <span class="veg-icon">V</span>', desc: "Hausgemachtes Brot, geröstet mit Tomaten, Knoblauch, Zwiebel", price: 7.50 },
+        { id: 2, name: 'ÜBERBACKENER SCHAFSKÄSE <span class="veg-icon">V</span>', desc: "Olive, Peperoni, Olivenöl, Tomaten, Weißwein, Knoblauch, Origano", price: 9.50 },
+        { id: 3, name: 'TOMATENSUPPE <span class="veg-icon">V</span>', desc: "Mit Basilikumcreme", price: 6.50 },
+        { id: 4, name: 'PIZZA STANGE <span class="veg-icon">V</span>', desc: "Knoblauch, Kräuter", price: 4.50 }
+    ]},
+    // { category: "SALATE", items: [
+    //     { id: 30,  name: 'GEMISCHTER SALAT <span class="veg-icon">V</span>', desc: "Grüner Salat,Tomaten,Gurken,Karotten", price: 7.50 },
+    //     { id: 31, name: "INSALATA HAWAII", desc: "Grüner Salat,Tomaten,Gurken,Karotten,Putenstreifen,Ananas", price: 10.50 },
+    //     { id: 32, name: 'TROPEA SALAT <span class="veg-icon">V</span>', desc: "Grüner Salat,Tomaten,Gurken,Karotten,Peperoni,Fetakäse,Paprika,Mais,gekochtes Ei,Oliven & Zwiebeln", price: 6.50 }
+        
+    // ]},
+    { category: "SALATE", items: [
+        { id: 30, name: 'GEMISCHTER SALAT<span class="veg-icon">V</span>', desc: "Grüner Salat,Tomaten,Gurken,Karotten", price: 7.50 },
+        { id: 31, name: "INSALATA HAWAII", desc: "Grüner Salat,Tomaten,Gurken,Karotten,Putenstreifen,Ananas", price: 14.50 },
+        // { id:32, name:'GEMISCHTER SALAT<span class="veg-icon">V</span>', desc:"Grüner Salat,Tomaten,Gurken,Karotten,Peperoni,Fetakäse,Paprika,Mais,gekochtes Ei,Oliven & Zwiebeln" }
+         { id: 32, name: 'TROPEA SALAT<span class="veg-icon">V</span>', desc: "Grüner Salat, Tomaten, Gurken, Karotten, Peperoni, Fetakäse, Paprika, Mais,gekochtes Ei, Oliven und Zwiebeln", price: 12.50 },
+        { id: 33, name: "SALAT TOSCANA", desc: "Gemischter Salat mit Pinien,Lachs,Mais,Kirschtomaten", price: 15.50 },
+       
+        { id: 34, name: 'INSALATA CAPRESE<span class="veg-icon">V</span>', desc: "Frische Tomaten,Mozzarella,Basilikum", price: 10.50 },
+
+        { id: 35, name: "INSALATA NIZZA", desc: "Grüner Salat,Tomaten,Gurken,Karotten,Thunfisch,rote Zwiebel, gekochtes Ei,Oliven,Artischocken", price: 12.50 },
+
+        { id: 36, name: "INSALATA ITALIA", desc: "Grüner Salat,Karotten,gekochtes Ei,Tomaten,Gurken,deutscher Hinterschinken,Käse,rote Zwiebel", price: 12.50 },
+
+        { id: 37, name: "CEASAR SALAT", desc: "Putenstückchen,Cherrytomaten,Mais,Parmesan,Splitter,Croutons", price: 14.50 },
+
+        { id: 38, name: "INSALATA FRUTTI DI MARE", desc: "Meeresfrüchte,Knoblauch,Grüner Salat,Zitronen Vinaigrette", price: 15.00 },
+      
+    ]},
+    { category: "PIZZA", items: [
+        { id: 90, name: 'PIZZA BRUSCHETTA<span class="veg-icon">V</span>', desc: "Frische Tomaten, Schafskäse, Basilikum", price: 9.50 },
+        { id: 91, name: 'PIZZABROT<span class="veg-icon">V</span>', desc: "Tomatensauce", price: 7.50 },
+        { id: 92, name: 'PIZZA MARGHERITA<span class="veg-icon">V</span>', desc: "Tomatensauce,Mozzarella,Käse,Champignons", price: 10.50 },
+        { id: 93, name: '.PIZZA FUNGHI<span class="veg-icon">V</span>', desc: "Tomatensauce, Mozzarella, Käse, Champignons", price: 11.50 },
+        { id: 94, name: "PIZZA NAPOLI", desc: "Tomatensauce, Mozzarella, Käse, Kalamata, Sardellen, Kapern, Oliven", price: 12.50 },
+
+        { id: 95, name: "PIZZA TONNO", desc: "Tomatensauce, Mozzarella, Käse, Thunfisch, rote Zwiebel", price: 13.50 },
+
+        { id: 96, name: "HAWAII", desc: "Tomatensauce, Mozzarella, Käse, deutscher Hinterschinken, Ananas", price: 12.50 },
+
+        { id: 97, name: "PIZZA CAPRICCIOSA", desc: "Tomatensauce, Mozzarella, Käse, deutscher Hinterschinken, Zwiebel, Artischocken, Kalamata Oliven", price: 12.50 },
+
+        { id: 98, name: "PIZZA BOLOGNA", desc: "Tomatensauce,Mozzarella,Käse,deutscher Hinterschinken, Salami,Bolognesesauce", price: 12.50 },
+
+        { id: 99, name: "PIZZA SALMONE", desc: "Crème fraîche,Lachs,Spinat,Knoblauch,Ei", price: 14.50 },
+
+        { id: 100, name: "PIZZA SALAMI", desc: "Tomatensauce,Mozzarella,Käse,Salami", price: 11.00 },
+
+        { id: 101, name: "PIZZA SALAMI", desc: "Mit Paprika,Mozzarella,Peperoniwurst und Knoblauch", price: 11.50 },
+
+        { id: 102, name: "PIZZA FRUTTI DI MARE", desc: "Tomatensauce,Mozzarella,Käse,Meeresfrüchte,Knoblauch", price: 14.50 },
+
+        { id: 103, name: "PIZZA MEAT LOVERS", desc: "Tomatensauce,Mozzarella,Käse,Speck,Salami,Salsiccia,", price: 13.50 },
+
+        { id: 104, name: "PIZZA ESPANOLA", desc: "Tomatensauce,Mozzarella,Käse,Pesto,Garnelen,Chorizo,Cherrytomaten,Chilli und Aioli", price: 13.50 },
+
+        { id: 105, name: "PIZZA BBQ", desc: "Tomatensauce,Mozzarella,Käse,BBQ-Sauce,Speck,gebratene Hähnchenbrust,karamellisierte Zwiebeln", price: 13.00 },
+        { id: 106, name: "PIZZA RONI", desc: "Tomatensauce, Mozzarella, Käse, deutscher Hinterschinken, Salami, Champignons", price: 12.00 },
+
+        { id: 107, name: "PIZZA PARMA", desc: "Tomatensauce, Mozzarella, Käse, Parmaschinken, Cherrytomaten, Rucola, Parmesan", price: 14.50 },
+
+        { id: 108, name: "PIZZA CALZONE", desc: "Tomatensauce, Mozzarella, Käse, deutscher Hinterschinken, Salami, Champignons", price: 12.50 },
+
+        { id: 109, name: "PIZZA DIAVOLO", desc: "Mit Peperoniwurst,Zwiebeln,Knoblauch,Oliven,Peperoni", price: 12.50 },
+
+        { id: 110, name: 'PIZZA VEGETARISCH<span class="veg-icon">V</span>', desc: "Tomatensauce,Käse,Mozzarella,Zucchini,Paprika,Auberginen,karamellisierte Zwiebeln,Olivenöl", price: 12.50 },
+
+        { id: 111, name: "PIZZA AL POLLO", desc: "Crème fraîche,Mozzarella,Hähnchenbrust,Spinat,getr.Tomaten,Fetakäse,Zwiebel,Olivenöl", price: 13.50 },
+
+        { id: 112, name: 'PIZZA VIER KÄSE<span class="veg-icon">V</span>', desc: "Crème fraîche,Mozzarelle,Gorgonzola,Schafskäse,Parmesan", price: 13.50 },
+
+        { id: 113, name: "PIZZA ATHENE", desc: "Tomatensauce,Mozzarella,Käse,Peperoniwurst,Schafskäse,", price: 13.50 },
+
+        { id: 114, name: "PIZZA QUATTRO STAGIONI", desc: "Tomatensauce,Mozzarella,Käse,deutcher Hinterschinken,Salami,Champignons,Paprika", price: 12.50 }
+    ]},
+//     { category: "PINSA", items: [
+//     { id: 150, name: "PINSA CALABRESE", desc: "Tomatensauce,Mozzarella,Scharfe Salami,Gorgonzola,rote Zwiebel", price: 13.00 },
+//     { id: 151, name: "PINSA AMERIKANA", desc: "Tomatensauce,Mozzarella,Pommes,Würstchen", price: 12.00 },
+//     { id: 152, name: "PINSA NORMA", desc: "Tomatensauce,Mozzarella,Salsiccia,Gorgonzola,milde Pepperoni", price: 13.50 }
+   
+// ]},
+
+// { category: "PINSA", items: [
+//     { id: 150, name: "PINSA CALABRESE", desc: "Tomatensauce,Mozzarella,Scharfe Salami,Gorgonzola,rote Zwiebel", price: 13.00 },
+//     { id: 151, name: "PINSA AMERIKANA", desc: "Tomatensauce,Mozzarella,Pommes,Würstchen", price: 12.00 },
+//     { id: 152, name: "PINSA NORM", desc: "0.33l", price: 3.00 },
+//     { id: 303, name: "COLA ZERO", desc: "0.33l", price: 3.00 },
+//     { id: 304, name: "WASSER STILL", desc: "0.5l", price: 2.50 },
+//     { id: 305, name: "WASSER SPRUDEL", desc: "0.5l", price: 2.50 },
+//     { id: 306, name: "APFELSCHORLE", desc: "0.5l", price: 3.50 },
+//     { id: 307, name: "ORANGENSAFT", desc: "0.5l", price: 3.50 },
+//     { id: 308, name: "EISTEE PFIRSICH", desc: "0.33l", price: 3.00 },
+//     { id: 309, name: "EISTEE ZITRONE", desc: "0.33l", price: 3.00 }
+// ]},
+{ category: "PINSA", items: [
+    { id: 150, name: "PINSA CALABRESE", desc: "Tomatensauce, Mozzarella,Scharfe Salami, Gorgonzola, rote Zwiebel", price: 13.00 },
+    { id: 151, name: "PINSA AMERIKANA", desc: "Tomatensauce, Mozzarella, Pommes, Würstchen", price: 12.00 },
+    { id: 152, name: "PINSA NORMA", desc: "Tomatensauce, Mozzarella, Salsiccia, Gorgonzola, milde Pepperoni", price: 13.50 },
+    { id: 153, name: "PINSA FRIARIELLI", desc: "Crème fraîche, Mozzarella, Scamorza, Friarielli, Salsiccia, Knoblauchöl", price: 13.50 },
+    { id: 154, name: "PINSA PECORA NERA", desc: "Crème fraîche, Mozzarella, Scamorza, Chorizo, Tomaten, Trüffelcreme", price: 13.50 },
+    { id: 155, name: 'PINSA VOLLKORN FANTASIA<span class="veg-icon">V</span>', desc: "Mozzarella, Gorgonzola, Philadelphia, Birne, Walnüsse, Honig", price: 14.00 },
+    { id: 156, name: "PINSA PARMA", desc: "Tomatensauce, Mozzarella, Parmaschinken, Kirschtomaten, Rucola, Parmesansplitter", price: 13.50 },
+    { id: 157, name: "PINSA RUSTICA", desc: "Tomatensauce, Mozzarella, Salami, Schinken, Champignon, rote Zwiebeln, Knoblauchöl", price: 12.50 },
+    { id: 158, name: "PINSA MIMOSA", desc: "Crème fraîche, Mozzarella, Schinken, Mais", price: 12.00 },
+    { id: 159, name: "PINSA BRESAOLA", desc: "Crème fraîche, Mozzarella, Bresaola, Rucola, Kirschtomaten, Parmesansplitter", price: 14.00 }
+]},
+
+   
+    { category: "NUDELGERICHTE", items: [
+        { id: 190, name:'SPAGHETTI AGLIO OLIO<span class="veg-icon">V</span>', desc: "Frische Peperoncini, Knoblauch, Olivenöl", price: 10.50 },
+        { id: 191, name: "SPAGHETTI ALLA CARBONARA", desc: "Panaceta, Eigelb, Parmesan-Sahnesauce", price: 12.50 },
+        { id: 192, name: "SPAGHETTI FRUTTI DI MARE", desc: "Meeresfrüchte, Knoblauch", price: 14.50 },
+        { id: 193, name: 'TAGLIATELLE ALLO CHEF<span class="veg-icon">V</span>', desc: "Mit Pfifferlinge,Sahne-Tomaten Sauce und Knoblauch", price: 13.00 },
+
+        { id: 194, name: 'TAGLIATELLE AL BASILICO<span class="veg-icon">V</span>', desc: "Hausgemachtes Basilikumpesto, Parmesankäse, Tomaten, Knoblauch", price: 12.00 },
+
+        { id: 195, name: "TAGLIATELLE GAMBAS", desc: "Garnelen in Zitronen-Minze-Butter geschwenkt", price: 14.50 },
+        { id: 196, name: "TAGLIATELLE AL SALMONE", desc: "Frischer Lachs, Zuckerschoten,feine Safransauce, Lauch", price: 14.50 },
+
+        { id: 197, name: "TAGLIATELLE ROSÉ", desc: "Frischer Lachs, Knoblauch in Tomatensahnesauce", price: 13.50 },
+
+        { id: 198, name: "SPAGHETTI ALLA BOLOGNESE", desc: "Housgemachte Fleischsauce", price: 12.00 },
+
+        { id: 199, name: 'SPAGHETTI AL POMODORO<span class="veg-icon">V</span>', desc: "Housgemachte Tomatensauce, Knoblauch", price: 11.50 },
+
+        { id: 200, name: 'RIGATONI AL ARRABBIATA<span class="veg-icon">V</span> ', desc: "Hausgemachte scharfe Tomatensauce,Knoblauch,Zwiebel,Oliven", price: 12.00 },
+
+        { id: 201, name: 'RIGATONI LOMBARDI<span class="veg-icon">V</span>', desc: "Gorgonzolasauce,frittierter Rucola,geröstete Walnusse", price: 13.50 },
+
+        { id: 202, name: "RIGATONI AL CURRY", desc: "Currysauce, Zwiebeln, Zucchini, Rumpsteakstücken", price: 12.50 },
+
+        { id: 203, name: 'GNOCCHI SALVIA<span class="veg-icon">V</span>', desc: " In Salbei-Butter geschwenkt, Cherrytomaten, Parmesansplitter, Knoblauch", price: 11.50 },
+
+        { id: 204, name: "GNOCCHI GAMBERETTI", desc: "Zucchini, Kirchtomaten,Gambas, Knoblauch", price: 14.00 },
+
+        { id: 205, name: "TORTELLINI ALLA PANNA", desc: "Mit Fleischfüllung, deutscher Hinterschinken, Sahnesauce", price: 11.50 },
+
+        { id: 206, name: 'TORTELLINI SPINACI<span class="veg-icon">V</span>', desc: "Ricotta mit Spinatfüllung in Safran-Sahnesauce, Spinat, Parmesansplitter", price: 13.00 },
+
+        { id: 207, name: 'GNOCCHI GORGONZOLLA<span class="veg-icon">V</span>', desc: "Mit Sahnesauce", price: 12.50 },
+
+        { id: 208, name: "PENNE AL PESTO DI RUCOLA", desc: "Mit Hähnchenstücken", price: 12.50 },
+        
+    ]},
+    { category: "AUS DEM OFEN", items: [
+        { id: 230, name: "RIGATONI AURORA", desc: "Mit Bolognesesauce und Käse überbacken mit deutschem Hinterschinken", price: 12.00 },
+        { id: 231, name: "HAUSGEMACHTE LASAGNE", desc: "Mit Bolognesesahnsauce, deutschem Hinterschinken, Bechamel und Käse überbacken ", price: 12.50 },
+        { id: 232, name: "COMBINAZIONE", desc: "Nudelvariationen in Bolognese und Sahnesauce mit Käse überbacken", price: 11.50 },
+        { id: 233, name: "TORTELLINI 4 FORMAGGIO", desc: "Fleischfüllung mit 4 Käsesorten im Ofen überbacken ", price: 12.00 },
+        { id: 234, name: "HAUSGEMACHTE LACHSLASAGNE", desc: "Knoblauch, frischer Lachs & Spinat, Tomaten und Sahnesauce", price: 14.50 },
+        { id: 235, name: 'HAUSGEMACHTE CANNELLONI<span class="veg-icon">V</span>', desc: "Mit Spinat und Ricota überbacken,mit Tomaten-Sahnesauce ", price: 12.00 },
+        { id: 236, name: 'GNOCCHI SORENTINA<span class="veg-icon">V</span>', desc: "mit Tomatensauce und mit Mozzarella überbacken", price: 13.00 }
+    ]},
+    // { category: "Risotto", items: [
+    //     { id: 66, name: "Risotto mit Meeresfrüchten", price: 14.00 },
+    //     { id: 67, name: "Risotto Italia", desc: "mit Champignons und Pfifferlingen", price: 12.50 }
+    // ]},
+    { category: "FLEICHGERICHTE", items: [
+        { id: 250, name: "JÄGERSCHNITZEL VOM SCHWEIN", desc: "", price: 18.50 },
+        { id: 251, name: "CORDON BLEU VOM SCHWEIN", desc: "Schinken und Käse", price: 18.00 },
+
+        { id: 252, name: "PARMIGIANA VOM SCHWEIN", desc: "Paniert,mit deutschem Hinterschinken&Käse überbacken", price: 18.50 },
+        { id: 253, name: "WIENER SCHNITZEL,SCHWEIN", desc: "", price: 17.50 },
+
+        { id: 254, name: "PUTENSCHNITZEL PANIERT", desc: "Mit Zwiebelnsauce", price: 18.00 },
+        { id: 255, name: "CALAMARI FRITTIERT", desc: "Mit Salat", price: 18.00 },
+      
+    ]},
+    { category: "FAMILIENPIZZA", items: [
+        { id: "", name: "FAMILIENPIZZEN", desc: "", price: 29.00 },
+        { id: "", name: "MARGARITA", desc: "", price: 25.00 },
+     
+    ]},
+    { category: "Dessert", items: [
+        { id: 155, name: "TIRAMISU CLASSICO", desc: "Hausgemacht", price: 6.50 },
+      
+    ] }
+];
+
+let cart = [];
+
+function initMenu() {
+    const container = document.getElementById('menu-container');
+    menuData.forEach(section => {
+        const h2 = document.createElement('h2');
+        h2.textContent = section.category;
+        container.appendChild(h2);
+        
+        section.items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-details">
+                    <span class="item-name">${item.id ? item.id + '. ' : ''}${item.name}</span>
+                    <span class="item-desc">${item.desc}</span>
+                    <span class="price">${item.price.toFixed(2)}€</span>
+                </div>
+                <button class="add-btn" onclick="addToCart('${item.name.replace(/<[^>]*>?/gm, '')}', ${item.price})">+</button>
+            `;
+            container.appendChild(div);
+        });
+    });
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price, note: "" });
+    updateCartUI();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+function updateNote(index, value) {
+    cart[index].note = value;
+}
+
+function updateCartUI() {
+    const cartBox = document.getElementById('cart-container');
+    const itemsList = document.getElementById('cart-items');
+    const totalSpan = document.getElementById('total-price');
+    
+    if (cart.length === 0) {
+        cartBox.style.display = 'none';
+        return;
+    }
+    
+    cartBox.style.display = 'block';
+    itemsList.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        total += item.price;
+        itemsList.innerHTML += `
+            <div style="margin-bottom:15px;">
+                <div class="cart-item">
+                    <span><strong>${item.name}</strong></span>
+                    <span>${item.price.toFixed(2)}€ <button class="remove-btn" onclick="removeFromCart(${index})">✕</button></span>
+                </div>
+                <input type="text" class="note-input" placeholder="Wünsche (z.B. ohne Zwiebeln, Extra Käse...)" 
+                    oninput="updateNote(${index}, this.value)" value="${item.note}">
+            </div>
+        `;
+    });
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function sendWhatsApp() {
+    const phone = "+49015257029115"; 
+    let text = "*Neue Bestellung *%0A--------------------------%0A";
+    
+    cart.forEach(item => {
+        text += `• *${item.name}* (${item.price.toFixed(2)}€)%0A`;
+        if(item.note) text += `  _Notiz: ${item.note}_%0A`;
+    });
+    
+    const total = document.getElementById('total-price').textContent;
+    text += `--------------------------%0A*Gesamtbetrag: ${total}€*%0A%0A_Bitte bestätigen Sie meine Bestellung._`;
+    
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+}
+
+initMenu();
+</script>
+
+<div class="lieferpreise">
+    <h3>LIEFERPREISE</h3>
+    <div class="row">
+      <li> <span>Bad Rappenau Stadt</span>
+        <span>3,00€</span> </li>
+      
+   <li>     <span>Ab 4 Km Entfernung</span>
+        <span>4,00€</span> </div> </li>
+   
+   <div class="row">
+      <li>  <span>Ab 5 Km Entfernung</span>
+        <span>4,50€</span> </li>
+    
+       <li>  <span>Ab 10 Km Entfernung</span>
+        <span>5,00€</span>
+       </li>
+    </div>
+</div>
+
+</body>
+</html>
